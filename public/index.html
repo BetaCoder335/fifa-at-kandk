@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kurry & Kabab | FIFA World Cup 2026</title>
+    <meta name="description" content="Watch FIFA World Cup 2026 live at Kurry & Kabab. Legal Zee5 streaming, snacks & soft drinks included. Register your spot now!">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Padauk:wght@400;700&family=Almarai:wght@300;400;700&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Confetti JS for success state -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    
+    <!-- 1. CUSTOM INTERACTIVE CURSOR -->
+    <div id="customCursor" class="custom-cursor"></div>
+
+    <!-- 2. SCRAMBLE LAYER -->
+    <div id="glitchOverlay" class="glitch-overlay hidden"></div>
+
+    <!-- 3. PRELOADER -->
+    <div id="preloader" class="preloader-overlay">
+        <div class="preloader-container">
+            <div class="preloader-inner">
+                <div class="card card--1"></div>
+                <div class="card card--2">🏆</div>
+                <div class="card card--3">⚽</div>
+                <div class="card card--4">⭐</div>
+                <div class="card card--5">🍛</div>
+                <div class="card card--6"></div>
+            </div>
+            <div class="loader-logo">
+                <span class="logo-sub">KURRY & KABAB</span>
+                <span class="logo-main">FIFA 2026</span>
+            </div>
+            <div class="loading-bar-wrapper">
+                <div class="loading-bar-fill"></div>
+            </div>
+            <span class="loading-text font-outline">LOADING MATCH EXPERIENCE...</span>
+        </div>
+    </div>
+
+    <!-- 4. PAMPHLET ADVERTISEMENT -->
+    <div id="pamphletAdvert" class="pamphlet-overlay hidden">
+        <div class="pamphlet-card glass-panel-glow">
+            <!-- Partner Logos -->
+            <div class="pamphlet-logos">
+                <div class="pamphlet-logo-item">
+                    <img src="images/kandk-logo.png" alt="Kurry and Kabab Logo" class="pamphlet-logo-img kandk-logo">
+                </div>
+                <div class="pamphlet-logos-divider">
+                    <span class="divider-x">×</span>
+                </div>
+                <div class="pamphlet-logo-item">
+                    <img src="images/fifa26-logo.png" alt="FIFA World Cup 2026 Logo" class="pamphlet-logo-img fifa-logo">
+                </div>
+            </div>
+
+            <div class="pamphlet-badge">EXCLUSIVELY AT KURRY & KABAB</div>
+
+
+            <div class="pamphlet-text">
+                <p class="advert-tag">THE CHAMPIONSHIP IS HERE</p>
+                <h1 class="advert-title">FIFA WORLD CUP <span class="gold-gradient">2026</span></h1>
+                <p class="advert-venue">LIVE ON ZEE5 · LATE NIGHT MATCHES</p>
+                
+                <div class="advert-features">
+                    <div class="feature-item">
+                        <span class="feature-icon">📺</span>
+                        <div class="feature-detail">
+                            <strong>Zee5 Streaming</strong>
+                            <p>Official broadcast on big screen TV — every match, live</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🍿</span>
+                        <div class="feature-detail">
+                            <strong>Snacks & Soft Drinks Included</strong>
+                            <p>Per-person price covers snacks + soft drinks all night</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🍺</span>
+                        <div class="feature-detail">
+                            <strong>Beer Available (21+ · ID Required)</strong>
+                            <p>Extra charge applies · Valid ID mandatory at entry</p>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">💬</span>
+                        <div class="feature-detail">
+                            <strong>WhatsApp Confirmation</strong>
+                            <p>Once threshold reached, we'll send time, price & details to your number</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pamphlet-notice">
+                    <span class="notice-icon">🌙</span>
+                    <p>Late night matches will be hosted <strong>only if enough people register</strong>. Secure your spot to help us open!</p>
+                </div>
+            </div>
+            
+            <button id="enterAppBtn" class="btn-rsvp">
+                <span class="btn-rsvp-text">REGISTER MY SPOT NOW</span>
+                <span class="btn-rsvp-sub">Tap to open booking · Free to register</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- 5. MAIN WEBAPP CONTAINER -->
+    <div id="appContainer" class="app-container hidden">
+        
+        <!-- TOP LEFT: Spots Booking Live Counter -->
+        <div class="top-counter-widget">
+            <div class="counter-header-group">
+                <span class="pulse-green"></span>
+                <span class="widget-label">REGISTERED SPOTS</span>
+            </div>
+            <div class="widget-values">
+                <span id="currentEnquiries">0</span>
+                <span class="divider">/</span>
+                <span id="targetEnquiries" class="target">50</span>
+            </div>
+            <div class="progress-bar-track">
+                <div id="progressBar" class="progress-bar-fill"></div>
+            </div>
+        </div>
+
+        <!-- RIGHT SIDE: Vertical Navigation Menu -->
+        <nav class="vertical-nav">
+            <div class="nav-logo">K // K</div>
+            <ul class="nav-list">
+                <li class="nav-item active" data-index="0">EVENT</li>
+                <li class="nav-item" data-index="4">ABOUT</li>
+                <li class="nav-item" data-index="3">REGISTER</li>
+            </ul>
+        </nav>
+
+        <!-- BOTTOM RIGHT: Vertical Scroll Indicator -->
+        <div class="scroll-indicator">
+            <span class="scroll-text">SCROLL</span>
+            <div class="scroll-line"></div>
+        </div>
+
+        <!-- LEFT SIDE: Metadata Panel -->
+        <aside class="metadata-panel">
+            <div class="metadata-indicator">
+                <span class="dot"></span>
+                <span id="metaIndex" class="scramble-text">EVENT 01 / 05</span>
+            </div>
+            
+            <div class="metadata-group">
+                <span class="meta-label" id="metaLabel1">VENUE</span>
+                <span id="metaClient" class="meta-value scramble-text">KURRY &amp; KABAB</span>
+            </div>
+            
+            <div class="metadata-group">
+                <span class="meta-label" id="metaLabel2">EVENT</span>
+                <span id="metaType" class="meta-value scramble-text">FIFA WORLD CUP</span>
+            </div>
+            
+            <div class="metadata-group">
+                <span class="meta-label" id="metaLabel3">STREAM</span>
+                <span id="metaAgency" class="meta-value scramble-text">ZEE5 OFFICIAL</span>
+            </div>
+            
+            <div class="metadata-group">
+                <span class="meta-label" id="metaLabel4">KICKOFF</span>
+                <span id="metaDate" class="meta-value scramble-text">JUNE 2026</span>
+            </div>
+
+            <div class="metadata-instruction">
+                <p id="metaInstruction">Scroll or tap RSVP to register. WhatsApp confirmation once threshold is reached.</p>
+            </div>
+        </aside>
+
+        <!-- CENTER AREA: Parallax Slide Presentation -->
+        <main class="slides-viewport">
+            <div class="slides-container" id="slidesContainer">
+                
+                <!-- Slide 1: Welcome -->
+                <section class="slide active" data-index="0">
+                    <div class="slide-content">
+                        <h1 class="slide-title scramble-text" data-text="FIFA 2026">FIFA 2026</h1>
+                        <p class="slide-subtitle scramble-text" data-text="Live on Zee5 at Kurry & Kabab — the ultimate late-night match viewing experience">Live on Zee5 at Kurry & Kabab — the ultimate late-night match viewing experience</p>
+                    </div>
+                </section>
+                
+                <!-- Slide 2: How It Works -->
+                <section class="slide" data-index="1">
+                    <div class="slide-content">
+                        <h1 class="slide-title scramble-text" data-text="HOW IT WORKS">HOW IT WORKS</h1>
+                        <p class="slide-subtitle scramble-text" data-text="Register below with your number. Once enough people sign up, we confirm the night — time, price & details sent to your WhatsApp">Register below with your number. Once enough people sign up, we confirm the night — time, price & details sent to your WhatsApp</p>
+                    </div>
+                </section>
+                
+                <!-- Slide 3: What's Included -->
+                <section class="slide" data-index="2">
+                    <div class="slide-content">
+                        <h1 class="slide-title scramble-text" data-text="WHATS INCLUDED">WHAT'S INCLUDED</h1>
+                        <p class="slide-subtitle scramble-text" data-text="Snacks & soft drinks per person included in price. Beer available for 21+ with valid ID — extra charges apply. Come enjoy the game!">Snacks & soft drinks per person included in price. Beer available for 21+ with valid ID — extra charges apply. Come enjoy the game!</p>
+                    </div>
+                </section>
+                
+                <!-- Slide 4: Enquiry / RSVP Form -->
+                <section class="slide" data-index="3">
+                    <div class="slide-content form-slide-content">
+                        
+                        <!-- A. Form Wrapper -->
+                        <div id="formSection" class="form-wrapper">
+                            <h1 class="slide-title form-title scramble-text" data-text="REGISTER NOW">REGISTER NOW</h1>
+                            <p class="slide-subtitle form-subtitle scramble-text" data-text="One registration per number. We'll WhatsApp you details once confirmed.">One registration per number. We'll WhatsApp you details once confirmed.</p>
+                            
+                            <form id="enquiryForm" class="kirifuda-form">
+                                <div class="input-row">
+                                    <label for="name">FULL NAME</label>
+                                    <input type="text" id="name" name="name" required placeholder="Your Name" autocomplete="name">
+                                </div>
+                                
+                                <div class="input-row">
+                                    <label for="phone">WHATSAPP NUMBER</label>
+                                    <input type="tel" id="phone" name="phone" required placeholder="+91 98765 43210" autocomplete="tel">
+                                    <span class="error-msg" id="phoneError"></span>
+                                </div>
+
+                                <div class="input-row">
+                                    <label for="guests">GUESTS</label>
+                                    <select id="guests" name="guests" required>
+                                        <option value="1">1 Person</option>
+                                        <option value="2" selected>2 People</option>
+                                        <option value="3">3 People</option>
+                                        <option value="4">4 People</option>
+                                        <option value="5+">5+ Group</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-notice-box">
+                                    <span>🌙</span>
+                                    <p>Late night matches confirmed only when enough people register. Snacks & soft drinks included. Beer for 21+ (ID required, extra charge).</p>
+                                </div>
+
+                                <button type="submit" id="submitBtn" class="btn-submit">
+                                    <span class="btn-text">CONFIRM REGISTRATION</span>
+                                    <div class="loader hidden"></div>
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- B. Success Screen -->
+                        <div id="successSection" class="form-result-screen success-screen hidden">
+                            <div class="result-badge green">REGISTERED ✓</div>
+                            <h2 class="result-title">YOU'RE ON THE LIST!</h2>
+                            <p class="result-desc">Your spot is noted. Once the threshold of registrations is reached, we'll send you the confirmed time, venue details & price directly on WhatsApp.</p>
+                            <div class="result-details">
+                                <p>WHATSAPP: <strong id="displayPhone">N/A</strong></p>
+                                <p>STATUS: <span>Pending Confirmation</span></p>
+                            </div>
+                            <p class="result-note">Keep an eye on your WhatsApp — we'll reach out before the match night. 🏆</p>
+                            <button class="btn-reset" onclick="window.location.reload()">BACK TO START</button>
+                        </div>
+
+                        <!-- C. Already Registered Screen -->
+                        <div id="alreadySection" class="form-result-screen already-screen hidden">
+                            <div class="result-badge red">ALREADY REGISTERED</div>
+                            <h2 class="result-title">NUMBER FOUND</h2>
+                            <p class="result-desc">This WhatsApp number has already been registered for the FIFA World Cup 2026 night at Kurry & Kabab.</p>
+                            
+                            <div class="result-stats-box">
+                                <span class="stats-label">TOTAL SPOTS REGISTERED</span>
+                                <div class="stats-value"><span id="alreadyTotalCount">0</span> / 50</div>
+                            </div>
+                            
+                            <p class="result-note">Only one entry per WhatsApp number to ensure fair allocation. We'll contact everyone once confirmed.</p>
+                            <button class="btn-reset" onclick="window.location.reload()">TRY ANOTHER NUMBER</button>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- Slide 5: About Section -->
+                <section class="slide" data-index="4">
+                    <div class="slide-content about-slide-content">
+                        <h1 class="slide-title scramble-text" data-text="ABOUT US">ABOUT US</h1>
+                        <div class="about-grid">
+                            <div class="about-col">
+                                <h3>WHO WE ARE</h3>
+                                <p>Kurry & Kabab is a beloved local restaurant bringing you the best of desi flavours. During FIFA 2026, we transform into your ultimate match-night destination — good food, great vibes, and live football.</p>
+                            </div>
+                            <div class="about-col">
+                                <h3>THE EXPERIENCE</h3>
+                                <p>Legal Zee5 streaming on big screen TV. Snacks & soft drinks per person included. Beer for 21+ (ID required, extra charges apply). Late night matches opened based on registrations.</p>
+                            </div>
+                            <div class="about-col">
+                                <h3>HOW TO CONFIRM</h3>
+                                <p>Register your WhatsApp number below. Once we hit the threshold, you'll receive confirmation, match time, and pricing details directly on WhatsApp. No spam — just the match night details.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+        
+    </div>
+
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- JS -->
+    <script src="app.js"></script>
+</body>
+</html>
